@@ -3,35 +3,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.byparad1st.game">
 
+    <!-- Permissions -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="com.android.vending.CHECK_LICENSE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
-    <!-- MINIMAL CHANGE: Add tools namespace if missing -->
-    
-    <!-- MINIMAL CHANGE: Add tools:ignore for deprecated permissions -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    <!-- Storage (legacy for old projects) -->
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
-    <uses-permission android:name="com.android.vending.CHECK_LICENSE"
+
+    <!-- Google Play license -->
+    <uses-permission
+        android:name="com.android.vending.CHECK_LICENSE"
         tools:ignore="ProtectedPermissions" />
 
+    <!-- Features -->
     <uses-feature android:glEsVersion="0x00020000" />
     <uses-feature
         android:name="android.hardware.touchscreen"
         android:required="false" />
 
+    <!-- Screen support -->
     <supports-screens
         android:anyDensity="true"
         android:largeScreens="true"
@@ -49,14 +52,15 @@
         android:usesCleartextTraffic="true"
         android:requestLegacyExternalStorage="true"
         tools:ignore="UnusedAttribute,GoogleAppIndexingWarning">
-        <!-- MINIMAL CHANGE: Added tools:ignore -->
 
+        <!-- Story -->
         <activity
             android:name="com.byparad1st.launcher.activity.StoryActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
 
+        <!-- File provider -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.byparad1st.game.provider"
@@ -67,43 +71,47 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
+        <!-- Game -->
         <activity
             android:name="com.byparad1st.game.core.GTASA"
+            android:exported="false"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"></activity>
-        
-        <!-- MINIMAL CHANGE: Fix exported for SplashActivity -->
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+
+        <!-- Launcher -->
         <activity
             android:name="com.byparad1st.launcher.activity.SplashActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.WithSplash">
-            <!-- MINIMAL CHANGE: Move intent-filter here -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
+
+        <!-- Main -->
         <activity
             android:name="com.byparad1st.launcher.activity.MainActivity"
-            android:exported="false"  <!-- Changed from true to false -->
-            android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.NoActionBar">
-            <!-- REMOVED: intent-filter from here -->
-        </activity>
-        
-        <activity
-            android:name="com.byparad1st.launcher.activity.LoaderActivity"
+            android:exported="false"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <!-- Loader -->
+        <activity
+            android:name="com.byparad1st.launcher.activity.LoaderActivity"
+            android:exported="false"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <!-- Extra -->
         <meta-data
             android:name="android.max_aspect"
             android:value="2.1" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
     </application>
 
 </manifest>
